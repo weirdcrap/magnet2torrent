@@ -21,4 +21,12 @@ To automate this conversion process I setup a cronjob to run every 30 minutes an
 
 */30 * * * * timeout 15m sh ~/magnet2torrent > /dev/null 2>&1
 
-In my limited testing this has worked flawlessly and there is little danger if configured correctly (I don't want to claim there is no potential dangers) of this script causing data loss or deleting a .magnet file before it has downloaded all of the metadata for that magnet and saved the corresponding trackerless .torrent file.
+What this does is launches the timeout process which then spawns a subprocess that executes my script and tracks how long it has been running. If the script hasn't exited on its own by the time 15 minutes is up timeout kills the script with kill -9. I do this because I assume that I will either:
+
+A) have so many magnet links it will take hours to resolve them all so this allows the script to process the files in "chunks" so to speak since it only removes a .magnet file once it has been successfully returned from the ih2torrent process.
+
+OR
+
+B) DHT is having trouble resolving some of the metadata so the script is called and it can just "try again later" when there are hopefully more peers available with the data we need.
+
+In my limited testing this has worked flawlessly and that if configured correctly there is little danger (I don't want to claim there is no potential dangers) of this script causing data loss or deleting a .magnet file before it has downloaded all of the metadata for that magnet and saved the corresponding trackerless .torrent file.
