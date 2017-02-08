@@ -1,0 +1,46 @@
+#!/bin/bash
+####################################################################
+# Author: weirdcrap						   #
+# Mail: weirdcrap    [(at)]     protonmail [dot]  com		   #
+# Version: 0.1 (beta)						   #
+# Purpose:							   #
+# I wrote/tested this in about an hour to enhance the functionality#
+# of Sonarr/Radarr's torrent black hole feature to convert .magnet #
+# files (links) into a torrent file that rtorrent could natively   #
+# import through my specified watch folder while preserving my     #
+# custom labels, download directories, etc.			   #
+# If you found this script then you must already know my pain lol  #
+#								   #
+# Function:							   # 
+# This loops through all the .magnet files in the directory saved  #
+# in $FILES and passes them through to ih2torrent which is itself  #
+# running in a python virtualenv (to prevent conflicts) that takes #
+# the infohash or magnet url and turns it into a .torrent file that#
+# rtorrent can then import through its watch folder.               #
+#								   #
+# All credit for ih2torrent goes to 				   #
+# Elektito: https://github.com/elektito/ih2torrent                 #
+# I look forward to seeing your v1.0 release with support for      #
+# magnets with trackers!                                           #
+####################################################################
+
+####################################################################
+# First some general file cleanup for my sanity.                   #
+# this just deletes any torrent files older than 2 days            #
+# which should gave rtorrent plenty of time to have picked them up.#
+####################################################################
+find ~/movie-watch/*.torrent -mtime +2 -exec rm {} \;
+
+FILES=~/movie-watch/*.magnet
+for f in $FILES
+do
+  # take action on each file. $f store current file name
+  #echo "Processing $f file..." #Uncomment for debugging
+  cat $f
+  source ~/virtualenv3/bin/activate
+  cd ~/movie-watch/
+  ih2torrent $(cat $f) #passes file contents to ih2torrent
+  #echo "Saving .torrent file" #Uncomment for debugging
+  rm -f $f
+  deactivate
+done
