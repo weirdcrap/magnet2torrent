@@ -1,12 +1,13 @@
 # magnet2torrent
-
 I wrote/tested this in about an hour to enhance the functionality of Sonarr/Radarr's torrent black hole feature to convert .magnet files (links) into a torrent file that rtorrent could natively import through my specified watch folder while preserving my custom labels, download directories, etc. If you found this script then you must already know my pain.
-
+ 
 This loops through all the .magnet files in the directory saved in $FILES and passes them through to ih2torrent which is itself running in a python virtualenv (to prevent dependency/package conflicts) that takes the infohash or magnet url and turns it into a .torrent file that rtorrent can then import through its watch folder. 
 
 All credit for ih2torrent goes to Elektito: https://github.com/elektito/ih2torrent
 I look forward to seeing your v1.0 release with support for magnets with trackers!
 
+# important notice
+At this point due to ih2torrent not having support for extracting trackers from magnet links this entire script and ih2torrent depend on the proper functionality of the DHT network and the DHT network only! This may lead to this script never working properly, downloads not starting due to lack of peers, etc! Please do not file any sort of bug report or complaint with me about why your download isn't working unless you believe you have actual evidence to show that this may be caused by my small script. Any bugs or issues with ih2torrent please address them to the appropriate author/repository.
 
 # Setup
 I designed and tested this script on a WhatBox slot and it works flawlessly. As long as your provider has Python3, allows you to install python packages, and allows you to create/modify/execute shell scripts this should work pretty much anywhere. The VirtualEnv is how WhatBox recommends you set things up but you should be able to accomplish the same results without it. See Elektito's GitHub above for details and requirements for ih2torrent.
