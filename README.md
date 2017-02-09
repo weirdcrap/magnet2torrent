@@ -31,3 +31,12 @@ OR
 B) DHT is having trouble resolving some of the metadata so the script is called and it can just "try again later" when there are hopefully more peers available with the data we need.
 
 In my limited testing this has worked flawlessly and that if configured correctly there is little danger (I don't want to claim there is no potential dangers) of this script causing data loss or deleting a .magnet file before it has downloaded all of the metadata for that magnet and saved the corresponding trackerless .torrent file.
+
+# Bug Reports
+Please use some common sense if you are going to file a bug report.
+
+-What OS are you running and is this a dedicated server or a seedbox?
+-What version of python are you running?
+-Is the script unmodified from how I have provided it?
+-Are you running it an a virtualenv like I suggested? No? Then try that before you file a report.
+-Does the offending magnet link work if you put it directly into your torrent client?
