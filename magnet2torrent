@@ -2,7 +2,7 @@
 ####################################################################
 # Author: weirdcrap						   #
 # Mail: weirdcrap    [(at)]     protonmail [dot]  com		   #
-# Version: 0.1 (beta)						   #
+# Version: 0.2 (beta)						   #
 # Purpose:							   #
 # I wrote/tested this in about an hour to enhance the functionality#
 # of Sonarr/Radarr's torrent black hole feature to convert .magnet #
@@ -25,6 +25,13 @@
 ####################################################################
 
 ####################################################################
+# Change log:													   #
+#	v0.1 (beta): Initial release								   #
+#	v0.2 (beta): Switched to aria2c for magnet resolution		   #
+####################################################################
+
+
+####################################################################
 # First some general file cleanup for my sanity.                   #
 # this just deletes any torrent files older than 2 days            #
 # which should gave rtorrent plenty of time to have picked them up.#
@@ -37,10 +44,8 @@ do
   # take action on each file. $f store current file name
   #echo "Processing $f file..." #Uncomment for debugging
   cat $f
-  source ~/virtualenv3/bin/activate
   cd ~/movie-watch/
-  ih2torrent $(cat $f) #passes file contents to ih2torrent
+  aria2c --bt-metadata-only=true --bt-save-metadata=true $(cat $f) #passes file contents to aria2c
   #echo "Saving .torrent file" #Uncomment for debugging
   rm -f $f
-  deactivate
 done
