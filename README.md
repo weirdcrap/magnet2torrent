@@ -26,7 +26,7 @@ To automate this conversion process I setup a cronjob to run every 5 minutes:
 
 */5 * * * * ~/magnet2torrent
 
-In my limited testing this has worked flawlessly and that if configured correctly there is little danger (I don't want to claim there is no potential dangers) of this script causing data loss or deleting a .magnet file before it has downloaded all of the metadata for that magnet and saved the corresponding trackerless .torrent file.
+In my limited testing this has worked flawlessly and that if configured correctly there is little danger (I don't want to claim there is no potential dangers) of this script causing data loss or deleting a .magnet file before it has downloaded all of the metadata for that magnet and saved the corresponding .torrent file.
 
 # Bug Reports
 Please use some common sense if you are going to file a bug report.
