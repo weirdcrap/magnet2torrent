@@ -14,9 +14,9 @@ This page will help you set up your rtorrent.rc file to create your watch direct
 
 To automate this conversion process I setup a cronjob to run every 30 minutes and used the timeout command in Linux to keep the script from running forever. The reason for this was that ih2torrent was DHT only, however I felt it was pertinent to leave this in here just in case there ever is a condition where aria2c can't resolve the necessary information quickly. To prevent this from running forever my crontab is set up like so:
 
-*/30 * * * * timeout 15m sh ~/magnet2torrent > /dev/null 2>&1
+*/5 * * * * timeout 3m magnet2torrent
 
-What this does is launches the timeout process which then spawns a subprocess that executes my script and tracks how long it has been running. If the script hasn't exited on its own by the time 15 minutes is up timeout kills the script with kill -9.
+What this does is launches the timeout process which then spawns a subprocess that executes my script and tracks how long it has been running. If the script hasn't exited on its own by the time is up timeout kills the script with kill -9.
 
 In my limited testing this has worked flawlessly and that if configured correctly there is little danger (I don't want to claim there is no potential dangers) of this script causing data loss or deleting a .magnet file before it has downloaded all of the metadata for that magnet and saved the corresponding trackerless .torrent file.
 
