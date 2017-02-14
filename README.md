@@ -11,6 +11,16 @@ I designed and tested this script on a WhatBox slot and it works flawlessly. Pla
 Aria2c will need to be compiled from source. I had no issues with dependencies on WhatBox when compiling. For info on compiling software on Whatbox see: https://whatbox.ca/wiki/Installing_Software
 
 This page will help you set up your rtorrent.rc file to create your watch directories: https://whatbox.ca/wiki/Editing_rtorrentrc
+Particularly I use these lines from http://www.krank.se/?p=431:
+
+This creates my watch folder:
+
+schedule = watch_directory_2,5,5,"load_start=~/movie-watch/*.torrent,d.set_custom1=couchpotato"
+
+This is used to move torrents based on labels:
+
+method.insert = d.get_finished_dir,simple,"cat=~/files/,$d.get_custom1="
+method.set_key = event.download.finished,move_complete,"d.set_directory=$d.get_finished_dir=;execute=mkdir,-p,$d.get_finished_dir=;execute=mv,-u,$d.get_base_path=,$d.get_finished_dir="
 
 To automate this conversion process I setup a cronjob to run every 5 minutes:
 
