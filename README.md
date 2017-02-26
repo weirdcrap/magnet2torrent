@@ -1,5 +1,5 @@
 # magnet2torrent
-I wrote/tested this in about an hour to enhance the functionality of Sonarr/Radarr's torrent black hole feature to convert .magnet files (links) into a torrent file that rtorrent could natively import through my specified watch folder while preserving my custom labels, download directories, etc. If you found this script then you must already know my pain.
+I wrote this to enhance the functionality of Sonarr/Radarr's torrent black hole feature to convert .magnet files (links) into a torrent file that rtorrent could natively import through my specified watch folder while preserving my custom labels, download directories, etc. If you found this script then you must already know my pain.
  
 This loops through all the .magnet files in the directory saved in $FILES and passes them through to aria2c which takes the infohash or magnet url and turns it into a .torrent file that rtorrent can then import through its watch folder.
 
