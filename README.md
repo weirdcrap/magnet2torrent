@@ -34,3 +34,5 @@ Please use some common sense if you are going to file a bug report.
 -What OS are you running and is this a dedicated server or a seedbox?
 -Is the script unmodified from how I have provided it?
 -Does the offending magnet link work if you put it directly into your torrent client?
+-Post the command you are using to invoke the script.
+-Please add &>~/magnet2torrent.log to the end of your command so that I can get any and all information that is getting output on either stdin or stderr. Post the log file with your issue.
