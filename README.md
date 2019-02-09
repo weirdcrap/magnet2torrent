@@ -1,11 +1,22 @@
 # magnet2torrent
-I wrote/tested this in about an hour to enhance the functionality of Sonarr/Radarr's torrent black hole feature to convert .magnet files (links) into a torrent file that rtorrent could natively import through my specified watch folder while preserving my custom labels, download directories, etc. If you found this script then you must already know my pain.
+I wrote this to enhance the functionality of Sonarr/Radarr's torrent black hole feature to convert .magnet files (links) into a torrent file that rtorrent could natively import through my specified watch folder while preserving my custom labels, download directories, etc. If you found this script then you must already know my pain.
  
 This loops through all the .magnet files in the directory saved in $FILES and passes them through to aria2c which takes the infohash or magnet url and turns it into a .torrent file that rtorrent can then import through its watch folder.
 
 All credit for aria2c goes to the original developers: https://aria2.github.io/
 
-# Setup
+# Ubuntu Setup
+
+ 1) install aria2 ```sudo apt install aria2```
+ 2) Aria2c daemon should be running i.e.
+ ```aria2c --daemon --enable-rpc=true --enable-dht --dht-listen-port=6881```
+ 3) make sure incomming port 6881 (TCP and UDP) is open (forwarded) on your router/firewall
+ 4) Replace $DIR with the watch directory path you have .magnet files being saved into by sonarr/radarr/sickgear/etc.
+ 5) make sure this script is executable ```chmod +x magnet2torrent.sh```
+ 6) add this script to cron ```crontab -e```
+ ```*/1 * * * * ~/magnet2torrent/magnet2torrent.sh```
+
+# WhatBox Setup
 I designed and tested this script on a WhatBox slot and it works flawlessly. Place the magnet2torrent file in your home directory and modify the paths in the file to match your directory structure.
 
 Aria2c will need to be compiled from source. I had no issues with dependencies on WhatBox when compiling. For info on compiling software on Whatbox see: https://whatbox.ca/wiki/Installing_Software
